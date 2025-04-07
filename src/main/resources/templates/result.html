@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MBTI 결과</title>
+    <style>
+        .bar-container {
+            width: 100%;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .bar-half {
+            height: 24px;
+            line-height: 24px;
+            font-size: 14px;
+            color: white;
+            text-align: center;
+        }
+
+        .dominant {
+            background-color: #4CAF50;
+        }
+
+        .non-dominant {
+            background-color: #c6c6c6;
+        }
+
+        .bar-left {
+            border-radius: 10px 0 0 10px;
+        }
+
+        .bar-right {
+            border-radius: 0 10px 10px 0;
+        }
+
+        .label {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+<h2>당신의 MBTI는 <span th:text="${mbti.type}"></span>입니다!</h2>
+
+<!-- E / I -->
+<div class="section">
+    <p class="label">E / I</p>
+    <div class="bar-container">
+        <div th:if="${mbti.ePercent >= mbti.iPercent}" class="bar-half bar-left dominant" th:style="'width:' + ${mbti.ePercent} + '%'">
+            <span th:text="'E ' + ${mbti.ePercent} + '%'"></span>
+        </div>
+        <div th:unless="${mbti.ePercent >= mbti.iPercent}" class="bar-half bar-left non-dominant" th:style="'width:' + ${mbti.ePercent} + '%'">
+            <span th:text="'E ' + ${mbti.ePercent} + '%'"></span>
+        </div>
+        <div th:if="${mbti.iPercent > mbti.ePercent}" class="bar-half bar-right dominant" th:style="'width:' + ${mbti.iPercent} + '%'">
+            <span th:text="'I ' + ${mbti.iPercent} + '%'"></span>
+        </div>
+        <div th:unless="${mbti.iPercent > mbti.ePercent}" class="bar-half bar-right non-dominant" th:style="'width:' + ${mbti.iPercent} + '%'">
+            <span th:text="'I ' + ${mbti.iPercent} + '%'"></span>
+        </div>
+    </div>
+</div>
+
+<!-- S / N -->
+<div class="section">
+    <p class="label">S / N</p>
+    <div class="bar-container">
+        <div th:if="${mbti.sPercent >= mbti.nPercent}" class="bar-half bar-left dominant" th:style="'width:' + ${mbti.sPercent} + '%'">
+            <span th:text="'S ' + ${mbti.sPercent} + '%'"></span>
+        </div>
+        <div th:unless="${mbti.sPercent >= mbti.nPercent}" class="bar-half bar-left non-dominant" th:style="'width:' + ${mbti.sPercent} + '%'">
+            <span th:text="'S ' + ${mbti.sPercent} + '%'"></span>
+        </div>
+        <div th:if="${mbti.nPercent > mbti.sPercent}" class="bar-half bar-right dominant" th:style="'width:' + ${mbti.nPercent} + '%'">
+            <span th:text="'N ' + ${mbti.nPercent} + '%'"></span>
+        </div>
+        <div th:unless="${mbti.nPercent > mbti.sPercent}" class="bar-half bar-right non-dominant" th:style="'width:' + ${mbti.nPercent} + '%'">
+            <span th:text="'N ' + ${mbti.nPercent} + '%'"></span>
+        </div>
+    </div>
+</div>
+
+<!-- T / F -->
+<div class="section">
+    <p class="label">T / F</p>
+    <div class="bar-container">
+        <div th:if="${mbti.tPercent >= mbti.fPercent}" class="bar-half bar-left dominant" th:style="'width:' + ${mbti.tPercent} + '%'">
+            <span th:text="'T ' + ${mbti.tPercent} + '%'"></span>
+        </div>
+        <div th:unless="${mbti.tPercent >= mbti.fPercent}" class="bar-half bar-left non-dominant" th:style="'width:' + ${mbti.tPercent} + '%'">
+            <span th:text="'T ' + ${mbti.tPercent} + '%'"></span>
+        </div>
+        <div th:if="${mbti.fPercent > mbti.tPercent}" class="bar-half bar-right dominant" th:style="'width:' + ${mbti.fPercent} + '%'">
+            <span th:text="'F ' + ${mbti.fPercent} + '%'"></span>
+        </div>
+        <div th:unless="${mbti.fPercent > mbti.tPercent}" class="bar-half bar-right non-dominant" th:style="'width:' + ${mbti.fPercent} + '%'">
+            <span th:text="'F ' + ${mbti.fPercent} + '%'"></span>
+        </div>
+    </div>
+</div>
+
+<!-- J / P -->
+<div class="section">
+    <p class="label">J / P</p>
+    <div class="bar-container">
+        <div th:if="${mbti.jPercent >= mbti.pPercent}" class="bar-half bar-left dominant" th:style="'width:' + ${mbti.jPercent} + '%'">
+            <span th:text="'J ' + ${mbti.jPercent} + '%'"></span>
+        </div>
+        <div th:unless="${mbti.jPercent >= mbti.pPercent}" class="bar-half bar-left non-dominant" th:style="'width:' + ${mbti.jPercent} + '%'">
+            <span th:text="'J ' + ${mbti.jPercent} + '%'"></span>
+        </div>
+        <div th:if="${mbti.pPercent > mbti.jPercent}" class="bar-half bar-right dominant" th:style="'width:' + ${mbti.pPercent} + '%'">
+            <span th:text="'P ' + ${mbti.pPercent} + '%'"></span>
+        </div>
+        <div th:unless="${mbti.pPercent > mbti.jPercent}" class="bar-half bar-right non-dominant" th:style="'width:' + ${mbti.pPercent} + '%'">
+            <span th:text="'P ' + ${mbti.pPercent} + '%'"></span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

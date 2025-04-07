@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MBTI 테스트</title>
+    <style>
+        .scale-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1em 0;
+        }
+
+        .circle-option {
+            border-radius: 50%;
+            border: 2px solid gray;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .circle-option.selected {
+            background-color: #4CAF50;
+        }
+
+        .circle-option.large {
+            width: 30px;
+            height: 30px;
+        }
+
+        .circle-option.medium {
+            width: 25px;
+            height: 25px;
+        }
+
+        .circle-option.small {
+            width: 20px;
+            height: 20px;
+        }
+
+        .circle-option.xsmall {
+            width: 15px;
+            height: 15px;
+        }
+    </style>
+
+    <script>
+        function selectOption(questionIndex, value) {
+            const container = document.querySelector(`.question-${questionIndex}`);
+            const options = container.querySelectorAll('.circle-option');
+            options.forEach(option => option.classList.remove("selected"));
+            document.getElementById(`input-${questionIndex}`).value = value;
+            if (options[value - 1]) {
+                options[value - 1].classList.add("selected");
+            }
+        }
+    </script>
+</head>
+<body>
+<h2>MBTI 테스트</h2>
+<form action="/mbti/test" method="post">
+    <div th:each="question, iterStat : ${questions}">
+        <p th:text="${question}"></p>
+        <div th:class="'scale-container question-' + ${iterStat.index}">
+            <span>그렇지 않다</span>
+            <div class="circle-option large" th:onclick="'selectOption(' + ${iterStat.index} + ', 1)'"></div>
+            <div class="circle-option medium" th:onclick="'selectOption(' + ${iterStat.index} + ', 2)'"></div>
+            <div class="circle-option small" th:onclick="'selectOption(' + ${iterStat.index} + ', 3)'"></div>
+            <div class="circle-option xsmall" th:onclick="'selectOption(' + ${iterStat.index} + ', 4)'"></div>
+            <div class="circle-option small" th:onclick="'selectOption(' + ${iterStat.index} + ', 5)'"></div>
+            <div class="circle-option medium" th:onclick="'selectOption(' + ${iterStat.index} + ', 6)'"></div>
+            <div class="circle-option large" th:onclick="'selectOption(' + ${iterStat.index} + ', 7)'"></div>
+            <span>그렇다</span>
+        </div>
+        <input type="hidden" name="answers" th:id="'input-' + ${iterStat.index}" value="4">
+    </div>
+
+    <button type="submit">제출</button>
+</form>
+</body>
+</html>
