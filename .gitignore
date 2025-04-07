@@ -61,3 +61,14 @@ out/
 
 # === VS Code ===
 .vscode/
+
+*.class
+*.jar
+*.war
+*.ear
+*.log
+.DS_Store
+Thumbs.db
+.env
+application-secret.yml
+.spring-boot-devtools.properties
